@@ -10,7 +10,27 @@
 TO_CHAR(TH_DATE_FROM,'dd/mm/yyyy')||' hingga '||TO_CHAR(TH_DATE_TO,'dd/mm/yyyy') DATE_DURATION,
 TO_CHAR(TH_TRAINING_FEE,'999,999,999.99') FEE,
 TH_TRAINING_VENUE||' , '||get_state_name(TH_TRAINING_STATE)||' , '||get_country_name(TH_TRAINING_COUNTRY) VENUE,
-sm_staff_name
+sm_staff_name,
+sth_training_refid,
+sth_staff_id,
+sm_staff_name,
+sm_dept_code,
+sm_job_code,
+SM_TELNO_WORK,
+SM_HANDPHONE_NO,
+ss_job_status,
+sjs_status_desc,
+sth_status,
+STH_DEPT_TRAINING_BENEFIT,
+STH_VERIFY_BY,
+to_char(STH_VERIFY_DATE,'dd/mm/yyyy') STH_VERIFY_DATE,
+STH_APPROVE_REASON,
+STH_APPROVE_BY,
+to_char(STH_APPROVE_DATE,'dd/mm/yyyy') STH_APPROVE_DATE,
+STH_STAFF_TRAINING_BENEFIT,
+STH_RECOMMENDER_REASON,
+STH_RECOMMEND_BY,
+to_char(STH_RECOMMEND_DATE,'dd/mm/yyyy') STH_RECOMMEND_DATE
 FROM TRAINING_HEAD, staff_training_head,staff_main,staff_service,staff_job_status
 WHERE TH_INTERNAL_EXTERNAL = 'EXTERNAL_AGENCY'
 and sth_training_refid = TH_REF_ID
@@ -18,7 +38,7 @@ and sth_staff_id = sm_staff_id
 and ss_staff_id = sm_staff_id
 and ss_job_status = sjs_status_code
 and sth_staff_id = $P{staffID} 
-AND TH_REF_ID =  $P{training_refid} ]]>
+AND TH_REF_ID =  $P{training_refid}]]>
 	</queryString>
 	<field name="TH_REF_ID" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="TH_REF_ID"/>
@@ -40,6 +60,66 @@ AND TH_REF_ID =  $P{training_refid} ]]>
 	</field>
 	<field name="SM_STAFF_NAME" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="SM_STAFF_NAME"/>
+	</field>
+	<field name="STH_TRAINING_REFID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="STH_TRAINING_REFID"/>
+	</field>
+	<field name="STH_STAFF_ID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="STH_STAFF_ID"/>
+	</field>
+	<field name="COLUMN_10" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SM_STAFF_NAME"/>
+	</field>
+	<field name="SM_DEPT_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SM_DEPT_CODE"/>
+	</field>
+	<field name="SM_JOB_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SM_JOB_CODE"/>
+	</field>
+	<field name="SM_TELNO_WORK" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SM_TELNO_WORK"/>
+	</field>
+	<field name="SM_HANDPHONE_NO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SM_HANDPHONE_NO"/>
+	</field>
+	<field name="SS_JOB_STATUS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SS_JOB_STATUS"/>
+	</field>
+	<field name="SJS_STATUS_DESC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SJS_STATUS_DESC"/>
+	</field>
+	<field name="STH_STATUS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="STH_STATUS"/>
+	</field>
+	<field name="STH_DEPT_TRAINING_BENEFIT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="STH_DEPT_TRAINING_BENEFIT"/>
+	</field>
+	<field name="STH_VERIFY_BY" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="STH_VERIFY_BY"/>
+	</field>
+	<field name="STH_VERIFY_DATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="STH_VERIFY_DATE"/>
+	</field>
+	<field name="STH_APPROVE_REASON" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="STH_APPROVE_REASON"/>
+	</field>
+	<field name="STH_APPROVE_BY" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="STH_APPROVE_BY"/>
+	</field>
+	<field name="STH_APPROVE_DATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="STH_APPROVE_DATE"/>
+	</field>
+	<field name="STH_STAFF_TRAINING_BENEFIT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="STH_STAFF_TRAINING_BENEFIT"/>
+	</field>
+	<field name="STH_RECOMMENDER_REASON" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="STH_RECOMMENDER_REASON"/>
+	</field>
+	<field name="STH_RECOMMEND_BY" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="STH_RECOMMEND_BY"/>
+	</field>
+	<field name="STH_RECOMMEND_DATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="STH_RECOMMEND_DATE"/>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -92,170 +172,257 @@ AND TH_REF_ID =  $P{training_refid} ]]>
 				</textElement>
 				<text><![CDATA[1. MAKLUMAT LATIHAN]]></text>
 			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="10" y="109" width="90" height="20" uuid="a84329f5-8de2-4d36-83fe-c1edc1617805"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="9"/>
-				</textElement>
-				<text><![CDATA[1.4 Tarikh]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="10" y="135" width="90" height="20" uuid="291d0a4e-7e8d-435f-8420-98016386652d"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="9"/>
-				</textElement>
-				<text><![CDATA[1.5 Yuran Penyertaan]]></text>
-			</staticText>
-			<frame>
-				<reportElement positionType="Float" x="10" y="57" width="545" height="20" uuid="787299a0-ee7f-4496-b800-81647ef0670d"/>
-				<staticText>
-					<reportElement positionType="Float" x="0" y="0" width="90" height="20" uuid="31440fa5-eb25-4def-aa1c-12ac5a6ef03e"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="9"/>
-					</textElement>
-					<text><![CDATA[1.2 Anjuran]]></text>
-				</staticText>
-				<frame>
-					<reportElement x="100" y="0" width="445" height="20" uuid="e2f74f57-20ca-4d8d-8897-82ff70d165e1"/>
-					<box>
-						<pen lineWidth="0.5"/>
-					</box>
-					<textField>
-						<reportElement x="12" y="1" width="188" height="20" uuid="31ccfc07-fdfd-49f4-88c1-58f3dc20dc8b"/>
-						<textElement verticalAlignment="Middle"/>
-						<textFieldExpression><![CDATA[$F{TH_ORGANIZER_NAME}]]></textFieldExpression>
-					</textField>
-				</frame>
-			</frame>
-			<frame>
-				<reportElement x="10" y="83" width="310" height="18" uuid="2dacf7cb-dcaf-4301-9d9a-49b3b6433a37"/>
-				<staticText>
-					<reportElement positionType="Float" x="0" y="0" width="90" height="18" uuid="17acb45e-855b-4ac3-a853-c62534343762"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="9"/>
-					</textElement>
-					<text><![CDATA[1.3 Tempat]]></text>
-				</staticText>
-				<frame>
-					<reportElement x="100" y="0" width="445" height="18" uuid="75d184b3-3595-428a-9d1e-18b18cd6eb66"/>
-					<box>
-						<pen lineWidth="0.5"/>
-					</box>
-					<textField isStretchWithOverflow="true">
-						<reportElement x="10" y="0" width="435" height="18" uuid="4c4a40dc-1516-4785-8e79-8114898a2394"/>
-						<textElement verticalAlignment="Middle"/>
-						<textFieldExpression><![CDATA[$F{VENUE}]]></textFieldExpression>
-					</textField>
-				</frame>
-			</frame>
 			<rectangle>
-				<reportElement x="-3" y="160" width="555" height="20" forecolor="#000000" backcolor="#000000" uuid="58117b37-1e3d-4e15-96a3-9c5cf8b085ae"/>
+				<reportElement positionType="Float" x="0" y="160" width="555" height="20" forecolor="#000000" backcolor="#000000" uuid="58117b37-1e3d-4e15-96a3-9c5cf8b085ae"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="160" width="150" height="20" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="522477fc-052c-4a2b-92b6-ba4dbdfb88a1"/>
+				<reportElement x="3" y="160" width="147" height="20" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="522477fc-052c-4a2b-92b6-ba4dbdfb88a1"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[1. MAKLUMAT LATIHAN]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="7" y="190" width="90" height="20" uuid="f3ab44c2-b7a2-4ec5-98d6-acb9344546ab"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="9"/>
-				</textElement>
-				<text><![CDATA[1.1 Tajuk]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="7" y="269" width="90" height="20" uuid="7b7e864d-a9f2-4233-82f9-6a4de6376b21"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="9"/>
-				</textElement>
-				<text><![CDATA[1.4 Tarikh]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="7" y="295" width="90" height="20" uuid="ae83b429-706b-466d-b112-ea97c8bd622b"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="9"/>
-				</textElement>
-				<text><![CDATA[1.5 Yuran Penyertaan]]></text>
+				<text><![CDATA[2. MAKLUMAT DIRI]]></text>
 			</staticText>
 			<frame>
-				<reportElement x="107" y="190" width="444" height="20" uuid="8fd25e06-4751-4cf7-bb9c-4c3c98e920e2"/>
-				<box>
-					<pen lineWidth="0.5"/>
-				</box>
-				<textField>
-					<reportElement x="13" y="2" width="160" height="18" uuid="5caac85b-66fe-4fb6-b587-320761fb4801"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{SM_STAFF_NAME}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<frame>
-				<reportElement positionType="Float" x="7" y="217" width="545" height="20" uuid="bdac4f82-486e-4b46-bf53-a5576773f9bc"/>
+				<reportElement x="10" y="215" width="170" height="20" uuid="6b7f8386-f52c-477d-9c89-f0e745c308ff"/>
 				<staticText>
-					<reportElement positionType="Float" x="0" y="0" width="90" height="20" uuid="c0deb957-e021-4a9c-b7cb-cdf47e0cab1a"/>
+					<reportElement x="0" y="0" width="90" height="20" uuid="f08b484c-e044-4427-a98d-70ea801fe5f7"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="9"/>
 					</textElement>
-					<text><![CDATA[1.2 Anjuran]]></text>
+					<text><![CDATA[2.2 No. Pekerja ]]></text>
 				</staticText>
 				<frame>
-					<reportElement x="100" y="0" width="444" height="20" uuid="7437a67f-2015-4906-ab7f-3804c4a69031"/>
+					<reportElement x="100" y="0" width="70" height="20" uuid="bf9123da-384d-4f33-94bf-01f82bf0a63b"/>
 					<box>
 						<pen lineWidth="0.5"/>
 					</box>
-					<textField>
-						<reportElement x="12" y="1" width="188" height="20" uuid="206dfbf3-87cb-4b95-869c-a7b9a47f2dab"/>
-						<textElement verticalAlignment="Middle"/>
-						<textFieldExpression><![CDATA[$F{TH_ORGANIZER_NAME}]]></textFieldExpression>
-					</textField>
-				</frame>
-			</frame>
-			<frame>
-				<reportElement x="7" y="243" width="310" height="18" uuid="946865c4-5826-4fa7-bc6f-b357f276d178"/>
-				<staticText>
-					<reportElement positionType="Float" x="0" y="0" width="90" height="18" uuid="9dc3b2ae-c8ca-48e1-9c29-f8c2de785839"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="9"/>
-					</textElement>
-					<text><![CDATA[1.3 Tempat]]></text>
-				</staticText>
-				<frame>
-					<reportElement x="100" y="0" width="210" height="18" uuid="7803c6fb-3af3-45fe-a8a2-d83c576eac7c"/>
-					<box>
-						<pen lineWidth="0.5"/>
-					</box>
-					<textField isStretchWithOverflow="true">
-						<reportElement x="10" y="0" width="80" height="18" uuid="5befc891-65c4-481c-bd53-8edcaa55b367"/>
-						<textElement verticalAlignment="Middle"/>
-						<textFieldExpression><![CDATA[$F{VENUE}]]></textFieldExpression>
-					</textField>
-				</frame>
-			</frame>
-			<frame>
-				<reportElement x="10" y="30" width="544" height="20" uuid="9c017f8f-a6ff-4883-85cc-f68fa3082189"/>
-				<staticText>
-					<reportElement x="0" y="0" width="90" height="20" uuid="aa744c60-5b7e-4592-be7d-8fcdf39f666c"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="9"/>
-					</textElement>
-					<text><![CDATA[1.1 Tajuk]]></text>
-				</staticText>
-				<frame>
-					<reportElement x="100" y="0" width="445" height="20" uuid="64c2c134-025d-42b7-b1de-4f8e0b4f5733"/>
-					<box>
-						<pen lineWidth="0.5"/>
-					</box>
-					<textField isStretchWithOverflow="true">
-						<reportElement stretchType="ContainerHeight" x="11" y="0" width="434" height="20" uuid="6ff08ef8-2235-4361-9330-e17552a54ee7"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="10" y="0" width="60" height="20" uuid="6eb22d2c-7d78-4d4a-ae37-babec4fdd5c3"/>
 						<textElement verticalAlignment="Middle">
-							<font fontName="Arial"/>
+							<font fontName="Arial" size="9"/>
 						</textElement>
-						<textFieldExpression><![CDATA[$F{TH_TRAINING_TITLE}]]></textFieldExpression>
+						<textFieldExpression><![CDATA[$F{STH_STAFF_ID}]]></textFieldExpression>
 					</textField>
 				</frame>
+				<staticText>
+					<reportElement x="90" y="0" width="10" height="20" uuid="b4b69a75-6267-42b8-b384-64e3023ca4cc"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="9"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement x="10" y="28" width="545" height="123" uuid="f31bf29f-f62c-476a-9e10-137b774ed0e6"/>
+				<frame>
+					<reportElement positionType="Float" x="0" y="27" width="545" height="20" uuid="787299a0-ee7f-4496-b800-81647ef0670d"/>
+					<staticText>
+						<reportElement positionType="Float" x="0" y="0" width="90" height="20" uuid="31440fa5-eb25-4def-aa1c-12ac5a6ef03e"/>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Arial" size="9"/>
+						</textElement>
+						<text><![CDATA[1.2 Anjuran]]></text>
+					</staticText>
+					<frame>
+						<reportElement x="100" y="0" width="445" height="20" uuid="e2f74f57-20ca-4d8d-8897-82ff70d165e1"/>
+						<box>
+							<pen lineWidth="0.5"/>
+						</box>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="10" y="0" width="435" height="20" uuid="31ccfc07-fdfd-49f4-88c1-58f3dc20dc8b"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial" size="9"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{TH_ORGANIZER_NAME}]]></textFieldExpression>
+						</textField>
+					</frame>
+					<staticText>
+						<reportElement x="90" y="0" width="10" height="20" uuid="43a8d599-d0a4-4746-a985-55b29d68c16d"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Arial" size="9"/>
+						</textElement>
+						<text><![CDATA[:]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement x="0" y="53" width="545" height="18" uuid="2dacf7cb-dcaf-4301-9d9a-49b3b6433a37"/>
+					<staticText>
+						<reportElement positionType="Float" x="0" y="0" width="90" height="18" uuid="17acb45e-855b-4ac3-a853-c62534343762"/>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Arial" size="9"/>
+						</textElement>
+						<text><![CDATA[1.3 Tempat]]></text>
+					</staticText>
+					<frame>
+						<reportElement x="100" y="0" width="445" height="18" uuid="75d184b3-3595-428a-9d1e-18b18cd6eb66"/>
+						<box>
+							<pen lineWidth="0.5"/>
+						</box>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="10" y="0" width="435" height="18" uuid="4c4a40dc-1516-4785-8e79-8114898a2394"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial" size="9"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{VENUE}]]></textFieldExpression>
+						</textField>
+					</frame>
+					<staticText>
+						<reportElement x="90" y="0" width="10" height="18" uuid="e2dde3ee-f9fc-409b-9ee3-89aa3fb8c149"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Arial" size="9"/>
+						</textElement>
+						<text><![CDATA[:]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement x="0" y="0" width="545" height="20" uuid="9c017f8f-a6ff-4883-85cc-f68fa3082189"/>
+					<staticText>
+						<reportElement x="0" y="0" width="90" height="20" uuid="aa744c60-5b7e-4592-be7d-8fcdf39f666c"/>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Arial" size="9"/>
+						</textElement>
+						<text><![CDATA[1.1 Tajuk]]></text>
+					</staticText>
+					<frame>
+						<reportElement x="100" y="0" width="445" height="20" uuid="64c2c134-025d-42b7-b1de-4f8e0b4f5733"/>
+						<box>
+							<pen lineWidth="0.5"/>
+						</box>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement stretchType="ContainerHeight" x="10" y="0" width="435" height="20" uuid="6ff08ef8-2235-4361-9330-e17552a54ee7"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial" size="9"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{TH_TRAINING_TITLE}]]></textFieldExpression>
+						</textField>
+					</frame>
+					<staticText>
+						<reportElement x="90" y="0" width="10" height="20" uuid="2ee054f8-00f2-418d-8085-b9e484eaa412"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Arial" size="9"/>
+						</textElement>
+						<text><![CDATA[:]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement x="0" y="79" width="545" height="18" uuid="cb47dc8b-6acd-4e87-b4e4-77ae743e66bf"/>
+					<staticText>
+						<reportElement positionType="Float" x="0" y="0" width="90" height="18" uuid="a84329f5-8de2-4d36-83fe-c1edc1617805"/>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Arial" size="9"/>
+						</textElement>
+						<text><![CDATA[1.4 Tarikh]]></text>
+					</staticText>
+					<frame>
+						<reportElement x="100" y="0" width="445" height="18" uuid="284edb4f-16e9-4318-893b-4ad0e9bb9ec9"/>
+						<box>
+							<pen lineWidth="0.5"/>
+						</box>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="10" y="0" width="435" height="18" uuid="46e7f444-d9fc-42c3-b296-0339a0bd6563"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial" size="9"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{DATE_DURATION}]]></textFieldExpression>
+						</textField>
+					</frame>
+					<staticText>
+						<reportElement x="90" y="0" width="10" height="18" uuid="b9007783-691f-43dd-80ee-243b7722a004"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Arial" size="9"/>
+						</textElement>
+						<text><![CDATA[:]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement x="0" y="105" width="545" height="18" uuid="b15b278c-b021-431d-bf80-c88342784d85"/>
+					<staticText>
+						<reportElement positionType="Float" x="0" y="0" width="90" height="18" uuid="291d0a4e-7e8d-435f-8420-98016386652d"/>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Arial" size="9"/>
+						</textElement>
+						<text><![CDATA[1.5 Yuran Penyertaan]]></text>
+					</staticText>
+					<frame>
+						<reportElement positionType="Float" x="100" y="0" width="445" height="18" uuid="3ac5f7b1-0152-4b6e-a9ab-ad82251de2ed"/>
+						<box>
+							<pen lineWidth="0.5"/>
+						</box>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="10" y="0" width="435" height="18" uuid="52bf3e82-a9a5-4937-83e6-9198a25e4fa1"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial" size="9"/>
+							</textElement>
+							<textFieldExpression><![CDATA["RM"+$F{FEE}]]></textFieldExpression>
+						</textField>
+					</frame>
+					<staticText>
+						<reportElement x="90" y="0" width="10" height="18" uuid="7c73c71d-9d07-477a-8787-60e134da3861"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Arial" size="9"/>
+						</textElement>
+						<text><![CDATA[:]]></text>
+					</staticText>
+				</frame>
+			</frame>
+			<frame>
+				<reportElement x="10" y="187" width="545" height="20" uuid="2d5741be-c24d-4237-99ac-ad9abc1d4cdc"/>
+				<staticText>
+					<reportElement x="0" y="0" width="90" height="20" uuid="de2da1f7-7fc0-435a-8c03-2fe1b0834fe2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="9"/>
+					</textElement>
+					<text><![CDATA[2.1 Nama]]></text>
+				</staticText>
+				<frame>
+					<reportElement x="100" y="0" width="445" height="20" uuid="5f57d848-f7f0-4bfb-bedb-167b7b674acf"/>
+					<box>
+						<pen lineWidth="0.5"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="10" y="0" width="435" height="20" uuid="0a38cb9f-4531-4d4e-a7bd-fcbb6aa62d3c"/>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Arial" size="9"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{SM_STAFF_NAME}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<staticText>
+					<reportElement x="90" y="0" width="10" height="20" uuid="3e3d9816-215c-43fc-a7bc-cc8fba214562"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="9"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement x="190" y="215" width="170" height="20" uuid="a30ed232-1c27-4415-b1b3-13892535189c"/>
+				<staticText>
+					<reportElement x="0" y="0" width="90" height="20" uuid="97bbffe8-d1a4-4bc5-8fb9-91f789747e90"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="9"/>
+					</textElement>
+					<text><![CDATA[2.3 Jawatan / Gred]]></text>
+				</staticText>
+				<frame>
+					<reportElement x="100" y="0" width="70" height="20" uuid="0c59aee1-1e5e-4f18-8d97-1b9da5092817"/>
+					<box>
+						<pen lineWidth="0.5"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="ContainerHeight" x="10" y="0" width="60" height="20" uuid="e89cc7de-8ffd-4107-b699-13161731fa09"/>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Arial" size="9"/>
+						</textElement>
+					</textField>
+				</frame>
+				<staticText>
+					<reportElement x="90" y="0" width="10" height="20" uuid="9cfd5b7c-82f1-4573-9984-fe77adb5b6d1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="9"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
 			</frame>
 		</band>
 	</detail>
