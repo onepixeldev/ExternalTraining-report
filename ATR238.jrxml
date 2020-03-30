@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ATR238" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="18e2b6be-1617-438c-9b79-28f9ebedec7e">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MyHRIS"/>
+	<subDataset name="organizerAddress" uuid="e6d63d26-8c15-4d0f-aacc-0947ffec3578">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MyHRIS"/>
+		<parameter name="ORG_CODE" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT TOH_ORG_DESC,TOH_ADDRESS,TOH_POSTCODE,TOH_CITY,SM_STATE_DESC,CM_COUNTRY_DESC
+FROM TRAINING_ORGANIZER_HEAD,STATE_MAIN,COUNTRY_MAIN
+WHERE TOH_ORG_CODE =  $P{ORG_CODE} 
+AND TOH_STATE = SM_STATE_CODE
+AND TOH_COUNTRY = CM_COUNTRY_CODE]]>
+		</queryString>
+		<field name="TOH_ORG_DESC" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="TOH_ORG_DESC"/>
+		</field>
+		<field name="TOH_ADDRESS" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="TOH_ADDRESS"/>
+		</field>
+		<field name="TOH_POSTCODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="TOH_POSTCODE"/>
+		</field>
+		<field name="TOH_CITY" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="TOH_CITY"/>
+		</field>
+		<field name="SM_STATE_DESC" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SM_STATE_DESC"/>
+		</field>
+		<field name="CM_COUNTRY_DESC" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="CM_COUNTRY_DESC"/>
+		</field>
+	</subDataset>
+	<subDataset name="upFormula" uuid="3e22d582-8c59-4acf-a93f-2337df0a2d1f">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MyHRIS"/>
+		<parameter name="TRAINING_REFID" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT THD_FOR_ATTENTION
+FROM TRAINING_HEAD_DETL
+WHERE THD_REF_ID = $P{TRAINING_REFID} ]]>
+		</queryString>
+		<field name="THD_FOR_ATTENTION" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="THD_FOR_ATTENTION"/>
+		</field>
+	</subDataset>
+	<parameter name="TRAINING_REFID" class="java.lang.String"/>
+	<parameter name="STAFFID" class="java.lang.String"/>
+	<parameter name="RUJUKAN" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT TO_CHAR(SYSDATE, 'DD MONTH YYYY') CURR_DATE,
+TH_REF_ID,TH_TRAINING_TITLE,TH_ORGANIZER_NAME,TH_TRAINING_VENUE,TH_TRAINING_STATE,TH_TRAINING_COUNTRY,
+TO_CHAR(TH_DATE_FROM,'dd/mm/yyyy')||' hingga '||TO_CHAR(TH_DATE_TO,'dd/mm/yyyy') TARIKH,
+TO_CHAR(TH_TRAINING_FEE,'999,999,999.99')FEE
+FROM TRAINING_HEAD
+WHERE TH_INTERNAL_EXTERNAL = 'EXTERNAL_AGENCY'
+AND TH_REF_ID = $P{TRAINING_REFID} 
+AND TH_STATUS = 'APPROVE']]>
+	</queryString>
+	<field name="CURR_DATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="CURR_DATE"/>
+	</field>
+	<field name="TH_REF_ID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="TH_REF_ID"/>
+	</field>
+	<field name="TH_TRAINING_TITLE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="TH_TRAINING_TITLE"/>
+	</field>
+	<field name="TH_ORGANIZER_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="TH_ORGANIZER_NAME"/>
+	</field>
+	<field name="TH_TRAINING_VENUE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="TH_TRAINING_VENUE"/>
+	</field>
+	<field name="TH_TRAINING_STATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="TH_TRAINING_STATE"/>
+	</field>
+	<field name="TH_TRAINING_COUNTRY" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="TH_TRAINING_COUNTRY"/>
+	</field>
+	<field name="TARIKH" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="TARIKH"/>
+	</field>
+	<field name="FEE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="FEE"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="103" splitType="Stretch">
+			<frame>
+				<reportElement x="19" y="-10" width="491" height="108" uuid="8deb3276-dc74-474f-bf2b-61d4624cbabe"/>
+				<image>
+					<reportElement x="0" y="0" width="171" height="108" uuid="218aff39-9a01-4171-9b8c-9356f26f16cd"/>
+					<imageExpression><![CDATA["ExternalTraining/logo.jpg"]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement x="191" y="10" width="254" height="18" uuid="56bd9f3a-1022-4a9e-8cea-8ac64433d3c6"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[UNIVERSITI PENDIDIKAN SULTAN IDRIS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="191" y="29" width="174" height="51" uuid="a3e00a76-5d07-48cd-af14-09ef703c045d"/>
+					<textElement>
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[35900 Tanjong Malim,
+Perak Darul Ridzuan, Malaysia
+Tel : 05-450 6000
+Faks : 05 : 459 5488]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="191" y="80" width="100" height="20" uuid="a00de7ca-ae4c-438d-bc84-b5928d630f42"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font fontName="Arial" isUnderline="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<style forecolor='	#0000FF'>www.upsi.edu.my</style>"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="351" y="80" width="140" height="20" uuid="9fc2a2b3-2ffc-4d77-8956-d6f15641fc6c"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font fontName="Arial" isUnderline="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<style forecolor='	#0000FF'>bsm.latihan@upsi.edu.my</style>"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="301" y="80" width="40" height="20" uuid="0b38ad62-1228-4e05-96ab-d04655216241"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Email :]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="363" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="b29cabbb-63e6-42e2-9bb4-0d4776f08ad6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<frame>
+				<reportElement x="330" y="0" width="170" height="20" uuid="ff3951c7-70f4-4df4-8287-32237c9e14f7"/>
+				<staticText>
+					<reportElement x="0" y="0" width="50" height="20" uuid="c306009d-8f6e-4257-b374-2f4564a5f2d7"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Ruj Kami]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="70" y="0" width="100" height="20" uuid="3ad15a90-b5c0-4bbf-9f9d-6729b82415a3"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{RUJUKAN}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="61" y="0" width="9" height="20" uuid="aae5166e-27b2-4d30-a754-f4c66b33d842"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement x="330" y="20" width="170" height="20" uuid="b6db64fc-998a-4297-a979-8e9a190d2723"/>
+				<staticText>
+					<reportElement x="0" y="0" width="50" height="20" uuid="2d3418d7-f257-454b-842d-0cb90fbef0ad"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Tarikh]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="61" y="0" width="9" height="20" uuid="4543e093-4a81-4a07-9010-4f8eb4bbd9a1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField pattern="d MMMM yyyy">
+					<reportElement x="70" y="0" width="100" height="20" uuid="73ea7cea-f97d-4e16-9f23-d83a2dfd8eec"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{CURR_DATE}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<componentElement>
+				<reportElement x="10" y="50" width="320" height="60" uuid="b8ca885f-2e8b-4cb5-aaaf-994df474632d"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="organizerAddress" uuid="d9fe0b39-2ad6-4857-8ded-73b440f5a695">
+						<datasetParameter name="ORG_CODE">
+							<datasetParameterExpression><![CDATA[$F{TH_ORGANIZER_NAME}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="60" width="320">
+						<textField>
+							<reportElement x="0" y="0" width="320" height="20" uuid="95dee1b9-e04c-47f3-a20a-0fd886b1c6cd"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial" size="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{TOH_ORG_DESC}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="0" y="12" width="320" height="20" uuid="ee036148-1092-406a-bcbb-c9be0e6ee4ad"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial" size="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{TOH_ADDRESS}+","]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="0" y="24" width="320" height="20" uuid="27a71ba2-36bf-4378-ba2f-afed7df5a6d1"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial" size="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{TOH_POSTCODE}+" "+$F{TOH_CITY}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="0" y="36" width="320" height="18" uuid="b24ca3e2-f4ef-4ede-8624-e4600b6b975f"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial" size="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{SM_STATE_DESC}+", "+$F{CM_COUNTRY_DESC}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement x="10" y="103" width="320" height="17" uuid="8f386833-1a8e-4057-8659-036f9e4e55cb"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="upFormula" uuid="95667c34-4122-407d-b024-e88c009ef5c7">
+						<datasetParameter name="TRAINING_REFID">
+							<datasetParameterExpression><![CDATA[$F{TH_REF_ID}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="17" width="320">
+						<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+							<reportElement x="0" y="0" width="320" height="17" uuid="c88f1c90-960c-49be-a675-b54d99d42e2c"/>
+							<textElement verticalAlignment="Top">
+								<font fontName="Arial"/>
+							</textElement>
+							<textFieldExpression><![CDATA[("U.P : "+(($F{THD_FOR_ATTENTION}!=null)?$F{THD_FOR_ATTENTION}:""))]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<staticText>
+				<reportElement x="10" y="130" width="100" height="17" uuid="305a1e5d-fc0c-47d7-a679-3b83d05ca341"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Tuan / Puan,]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="10" y="157" width="545" height="12" uuid="fccabf73-07fd-4281-bf64-89afbe0f3d93"/>
+				<textElement markup="html">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[("PENGESAHAN PESERTA KURSUS : "+(($F{TH_TRAINING_TITLE}!=null)?$F{TH_TRAINING_TITLE}:""))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="189" width="545" height="18" uuid="725262e1-523b-4766-a88c-7b5665c1c24c"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Saya dengan hormatnya merujuk kepada perkara di atas.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="213" width="545" height="18" uuid="0a5ab5f7-cb56-4a01-9518-b27ce767836f"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[2.   Pihak kami ingin membuat pengesahan tempahan bagi butiran seperti  berikut : ]]></text>
+			</staticText>
+			<frame>
+				<reportElement positionType="Float" x="30" y="255" width="525" height="20" uuid="39ab668f-3c03-47a2-8530-aa1785cf9794"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="ContainerHeight" x="95" y="0" width="430" height="20" uuid="0ac628a7-8bbe-4572-ad70-4d356ed28b15"/>
+					<textElement>
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TH_TRAINING_TITLE}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="80" height="20" uuid="704b9db3-09f9-48cc-b5f7-086179b03da3"/>
+					<textElement>
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nama Kursus]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="80" y="0" width="10" height="20" uuid="14abfa89-ecc1-40ad-985b-ca2012d2ad26"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="30" y="237" width="525" height="20" uuid="6d42d87c-f10f-4ce2-b12d-6d1fda682e06"/>
+				<textField isBlankWhenNull="true">
+					<reportElement x="95" y="0" width="430" height="20" uuid="826dd01a-7dd5-403f-a823-0dc5ed0c3c60"/>
+					<textElement>
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TARIKH}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="80" height="20" uuid="31fdebb1-efb9-4dcb-ab62-04a722283ef9"/>
+					<textElement>
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tarikh]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="80" y="0" width="10" height="20" uuid="56173c60-97e1-4b41-b7d7-699c3bd67d30"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
