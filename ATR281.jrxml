@@ -3,7 +3,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ATR281" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5093f0b3-7acf-4677-9dd0-15e94919837c">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MyHRIS"/>
-	<property name="ireport.jasperserver.url" value="http://10.99.4.7:8080/jasperserver/"/>
+	<property name="ireport.jasperserver.url" value="http://10.99.1.192:8080/jasperserver/"/>
 	<property name="ireport.jasperserver.user" value="syazwan|upsidev"/>
 	<property name="ireport.jasperserver.report.resource" value="/Reports/MyHRIS/HRA_AT/ATR281_files/main_jrxml"/>
 	<property name="ireport.jasperserver.reportUnit" value="/Reports/MyHRIS/HRA_AT/ATR281"/>
@@ -80,7 +80,7 @@ FROM (
 		<queryString language="SQL">
 			<![CDATA[select sm_staff_name
 		from staff_main
-		where sm_staff_id = $P{sthRecById} ]]>
+		where sm_staff_id = $P{sthRecById}]]>
 		</queryString>
 		<field name="SM_STAFF_NAME" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="SM_STAFF_NAME"/>
@@ -111,7 +111,7 @@ AND SM_JOB_CODE = SS_SERVICE_CODE]]>
 FROM STAFF_TRAINING_HEAD
 WHERE STH_APPROVE_BY IS NOT NULL
 AND STH_TRAINING_REFID = $P{refid} 
-AND STH_STAFF_ID = $P{sid} ]]>
+AND STH_STAFF_ID = $P{sid}]]>
 		</queryString>
 		<field name="APPR_CNT" class="java.math.BigDecimal">
 			<property name="com.jaspersoft.studio.field.label" value="APPR_CNT"/>
@@ -128,7 +128,7 @@ AND STH_STAFF_ID = $P{sid} ]]>
 from staff_training_head
 where sth_approve_by is not null
 and sth_training_refid = $P{refid} 
-and sth_staff_id = $P{sid} ]]>
+and sth_staff_id = $P{sid}]]>
 		</queryString>
 		<field name="STS_REJ" class="java.math.BigDecimal">
 			<property name="com.jaspersoft.studio.field.label" value="STS_REJ"/>
@@ -141,7 +141,7 @@ and sth_staff_id = $P{sid} ]]>
 		<queryString language="SQL">
 			<![CDATA[select sm_staff_name
 from staff_main
-where sm_staff_id = $P{apprById} ]]>
+where sm_staff_id = $P{apprById}]]>
 		</queryString>
 		<field name="SM_STAFF_NAME" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="SM_STAFF_NAME"/>
@@ -322,7 +322,7 @@ AND TH_REF_ID =  $P{training_refid}]]>
 					<textElement textAlignment="Center">
 						<font fontName="Arial" size="9" isBold="true"/>
 					</textElement>
-					<text><![CDATA[UNIT LATIHAN, BAHAGIAN SUMBER MANUSIA, JABATAN PENDAFTAR]]></text>
+					<text><![CDATA[BAHAGIAN PEMBANGUNAN SUMBER MANUSIA, JABATAN PENDAFTAR]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="170" y="55" width="340" height="30" uuid="f8fb2e62-dce1-4ea6-8c3b-c83ac7b1fb31"/>
@@ -335,7 +335,7 @@ AND TH_REF_ID =  $P{training_refid}]]>
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="717" splitType="Stretch">
+		<band height="709" splitType="Prevent">
 			<frame>
 				<reportElement x="10" y="28" width="545" height="123" uuid="f31bf29f-f62c-476a-9e10-137b774ed0e6"/>
 				<frame>
@@ -868,7 +868,7 @@ AND TH_REF_ID =  $P{training_refid}]]>
 					</staticText>
 					<componentElement>
 						<reportElement stretchType="ContainerHeight" x="50" y="0" width="225" height="20" uuid="49172f0c-a3f7-4496-8c51-b62467c5aabf"/>
-						<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+						<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 							<datasetRun subDataset="verBySvc" uuid="023e4937-fc6b-4956-bc62-b588ff6da228">
 								<datasetParameter name="verById">
 									<datasetParameterExpression><![CDATA[$F{STH_VERIFY_BY}]]></datasetParameterExpression>
@@ -932,7 +932,7 @@ AND TH_REF_ID =  $P{training_refid}]]>
 					</staticText>
 					<componentElement>
 						<reportElement stretchType="ContainerHeight" x="40" y="0" width="200" height="20" uuid="448f52ce-37a2-4710-a434-166ba6c8a127"/>
-						<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+						<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 							<datasetRun subDataset="verByName" uuid="11997b27-6092-4333-beda-cc178dd0a8e1">
 								<datasetParameter name="sthRecById">
 									<datasetParameterExpression><![CDATA[$F{STH_RECOMMEND_BY}]]></datasetParameterExpression>
@@ -969,7 +969,7 @@ AND TH_REF_ID =  $P{training_refid}]]>
 					</staticText>
 					<componentElement>
 						<reportElement stretchType="ContainerHeight" x="50" y="0" width="225" height="20" uuid="99fd19ee-279a-4a1f-98f3-e1cdb48e9a6a"/>
-						<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+						<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 							<datasetRun subDataset="recBySvc" uuid="eee0aafa-952b-4a2c-ab1b-31dc50776712">
 								<datasetParameter name="recById">
 									<datasetParameterExpression><![CDATA[$F{STH_RECOMMEND_BY}]]></datasetParameterExpression>
@@ -1086,7 +1086,7 @@ AND TH_REF_ID =  $P{training_refid}]]>
 					</staticText>
 					<componentElement>
 						<reportElement stretchType="ContainerHeight" x="40" y="0" width="200" height="20" uuid="3b893a76-02e8-43f7-8f28-a6de1e8582f9"/>
-						<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+						<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 							<datasetRun subDataset="apprByName" uuid="05475369-b8cb-46c1-9286-db1b9d450ae2">
 								<datasetParameter name="apprById">
 									<datasetParameterExpression><![CDATA[$F{STH_APPROVE_BY}]]></datasetParameterExpression>
@@ -1123,7 +1123,7 @@ AND TH_REF_ID =  $P{training_refid}]]>
 					</staticText>
 					<componentElement>
 						<reportElement stretchType="ContainerHeight" x="50" y="0" width="225" height="20" uuid="e0399f86-6e16-43ca-b8e8-5dc44c0b634d"/>
-						<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+						<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 							<datasetRun subDataset="apprBySvc" uuid="e31114f7-caa2-40e3-a062-d459e01fb292">
 								<datasetParameter name="apprById">
 									<datasetParameterExpression><![CDATA[$F{STH_APPROVE_BY}]]></datasetParameterExpression>
@@ -1195,7 +1195,7 @@ AND TH_REF_ID =  $P{training_refid}]]>
 						</box>
 						<componentElement>
 							<reportElement x="0" y="0" width="40" height="20" uuid="ded18244-5370-4c3a-89cb-1e7de62a65a1"/>
-							<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+							<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 								<datasetRun subDataset="stsAppr" uuid="eef92741-142d-4f37-acc7-17d6cb842f3f">
 									<datasetParameter name="refid">
 										<datasetParameterExpression><![CDATA[$F{TH_REF_ID}]]></datasetParameterExpression>
@@ -1237,7 +1237,7 @@ AND TH_REF_ID =  $P{training_refid}]]>
 						</box>
 						<componentElement>
 							<reportElement x="0" y="0" width="40" height="20" uuid="270a1737-a2a4-4d94-af10-c9f8501cd7ac"/>
-							<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+							<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 								<datasetRun subDataset="stsRej" uuid="e0f0f969-b8f1-445d-9ae7-9e3e1dffe9d0">
 									<datasetParameter name="refid">
 										<datasetParameterExpression><![CDATA[$P{training_refid}]]></datasetParameterExpression>
