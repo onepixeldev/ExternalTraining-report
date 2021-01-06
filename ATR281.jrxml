@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ATR281" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5093f0b3-7acf-4677-9dd0-15e94919837c">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MyHRIS"/>
-	<property name="ireport.jasperserver.url" value="http://10.99.1.192:8080/jasperserver/"/>
+	<property name="ireport.jasperserver.url" value="http://10.99.4.7:8080/jasperserver/"/>
 	<property name="ireport.jasperserver.user" value="syazwan|upsidev"/>
 	<property name="ireport.jasperserver.report.resource" value="/Reports/MyHRIS/HRA_AT/ATR281_files/main_jrxml"/>
 	<property name="ireport.jasperserver.reportUnit" value="/Reports/MyHRIS/HRA_AT/ATR281"/>
@@ -55,7 +55,7 @@ where dm_dept_code =  $P{sDeptCode}]]>
 CASE 
 WHEN (APM_DESC IS NOT NULL AND SS_DESC_SHORT IS NOT NULL OR SS_DESC_SHORT IS NULL) THEN APM_DESC
 WHEN (APM_DESC IS NULL AND SS_DESC_SHORT IS NOT NULL) THEN SS_DESC_SHORT
-WHEN (APM_DESC IS NULL AND SS_DESC_SHORT IS NULL) THEN 'GG'
+WHEN (APM_DESC IS NULL AND SS_DESC_SHORT IS NULL) THEN ''
 END AS VER_SVC
 FROM (
     SELECT INITCAP(APM_DESC) APM_DESC, SM1.SM_STAFF_ID SID1
